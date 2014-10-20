@@ -1,2 +1,4 @@
-bundle/
-.netrwhist
+_Store
+*.swp
+tmux/resurrect/*
+/env
