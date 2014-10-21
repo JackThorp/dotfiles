@@ -54,3 +54,5 @@ set hlsearch		" Highlight all matches of a search
 set incsearch		" Show matches whilst searching
 set ignorecase		" Ignore case of normal letters
 
+" -------- tagbar settings ----------------------------
+nmap <f8> :TagbarToggle<CR>
