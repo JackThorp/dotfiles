@@ -46,6 +46,10 @@ else
   export LSCOLORS=GxFxCxDxBxegedabagaced
 fi
 
+### Stop stderr of boot2docker ip showin in terminal
+docker-ip() {
+  boot2docker ip 2> /dev/null
+}
 # Force color output in tree
 alias tree='tree -C'
 
@@ -53,4 +57,11 @@ alias tree='tree -C'
 source ~/.bash_aliases
 source ~/.bash_ps1
 export NODE_PATH=/usr/local/lib/node_modules
+export GOPATH=$HOME/go
 export EDITOR=vim
+export CLOUDSTACK_API_URL="https://cloudstack.doc.ic.ac.uk:8443/client/api"
+export CLOUDSTACK_API_KEY="JObiUuA1sLKH_FZNrbICqE_6hnqp2yjZBIOQar1EfQf1aVu0f9K1zLMycXBDpu2izXp2kvIZ3OrHWhjsYRRjYg"
+export CLOUDSTACK_SECRET_KEY="Sr1AEjkm_8Ub7Ask6hDRI1AWJ007_pPyaSP_DDcQzT0WtV3zowT_g4yxq-4NDvDxTq3AGvejYnIicqjOs1ebBQ"
+export DOCKER_CERT_PATH=/Users/jackthorp/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+export DOCKER_HOST=tcp://192.168.59.103:2376
