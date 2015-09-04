@@ -17,6 +17,7 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'jcf/vim-latex'
+Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 
@@ -30,6 +31,9 @@ let g:molokai_original = 1
 
 set t_ut= 
 set t_Co=256
+
+au BufNewFile,BufRead *.es6 set filetype=javascript
+au BufNewFile,BufRead *.ract set filetype=html
 
 " --------- Indentation and formatting ------------------
 
@@ -50,9 +54,11 @@ set ruler				" Show line and column
 set mouse=a				" Enable mouse scrolling, pane selection
 set directory=~/.vim/swapfiles//	" Set swapfile location outside wd
 
+
 " -------- lates-suite Settings -----------------------
 set grepprg=grep\ -nH\ $* "required by latex-suite to force grep to always display filename
 let g:tex_flavor='latex'
+
 
 " -------- Search settings ----------------------------
 set hlsearch		" Highlight all matches of a search
