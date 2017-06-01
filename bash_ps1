@@ -33,9 +33,10 @@ _pwd_ps1()
   echo -e `_trunc_path "$wd"`
 }
 
+# TODO work out this grep regex...
 _git_ps1()
 {
-  local branch=$(git branch 2>/dev/null | grep -oP '(?<=\*\s).*')
+  local branch=$(git branch 2>/dev/null | grep -oe '(?<=\*\s).*')
   [[ -n $branch ]] && echo " ${D}on ${PINK}($branch)"
 }
 
@@ -44,8 +45,8 @@ HOST=`hostname`
 [ -e ~/.hostname ] && source ~/.hostname
 
 # Set to the debian colors
-PS1='\[${PINK}\]\u '                          # username
-PS1=$PS1'\[${D}\]at \[${ORANGE}\]$HOST '      # hostname
-PS1=$PS1'\[${D}\]in \[${GREEN}\]$(_pwd_ps1)'  # prwrkdir
-PS1=$PS1'$(_git_ps1) \n'                      # gitbrnch
-PS1=$PS1'\[${D}\]$ \[${CLRCOL}\]\[${GREY}\]'  # $ > grey
+PS1='\[${PINK}\]\u'                          # username
+#PS1=$PS1'\[${D}\]@\[${ORANGE}\]$HOST '      # hostname
+PS1=$PS1' \[${MAGENTA}\]$(_pwd_ps1) '         # prwrkdir
+#PS1=$PS1'$(_git_ps1) \n'                      # gitbrnch
+PS1=$PS1'\[${D}\]~>\[${CLRCOL}\] '  # $ > grey

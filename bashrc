@@ -53,15 +53,24 @@ docker-ip() {
 # Force color output in tree
 alias tree='tree -C'
 
-### OTHER ##########################################################
 source ~/.bash_aliases
 source ~/.bash_ps1
-export NODE_PATH=/usr/local/lib/node_modules
-export GOPATH=$HOME/go
+
+### NODE VERSION MANAGER ###########################################
+# NODE_PATH not set as all dependencies should be put in node_modules. Globals shouldn't be required from
+# within a node application? NVM handles putting globals on the PATH. 
+
+### LOAD NVM ###
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # -s => file exists. So source and load nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#export GOPATH=$HOME/go
 export EDITOR=vim
-export CLOUDSTACK_API_URL="https://cloudstack.doc.ic.ac.uk:8443/client/api"
-export CLOUDSTACK_API_KEY="JObiUuA1sLKH_FZNrbICqE_6hnqp2yjZBIOQar1EfQf1aVu0f9K1zLMycXBDpu2izXp2kvIZ3OrHWhjsYRRjYg"
-export CLOUDSTACK_SECRET_KEY="Sr1AEjkm_8Ub7Ask6hDRI1AWJ007_pPyaSP_DDcQzT0WtV3zowT_g4yxq-4NDvDxTq3AGvejYnIicqjOs1ebBQ"
-export DOCKER_CERT_PATH=/Users/jackthorp/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
-export DOCKER_HOST=tcp://192.168.59.103:2376
+#export CLOUDSTACK_API_URL="https://cloudstack.doc.ic.ac.uk:8443/client/api"
+#export CLOUDSTACK_API_KEY="JObiUuA1sLKH_FZNrbICqE_6hnqp2yjZBIOQar1EfQf1aVu0f9K1zLMycXBDpu2izXp2kvIZ3OrHWhjsYRRjYg"
+#export CLOUDSTACK_SECRET_KEY="Sr1AEjkm_8Ub7Ask6hDRI1AWJ007_pPyaSP_DDcQzT0WtV3zowT_g4yxq-4NDvDxTq3AGvejYnIicqjOs1ebBQ"
+#export DOCKER_CERT_PATH=/Users/jackthorp/.boot2docker/certs/boot2docker-vm
+#export DOCKER_TLS_VERIFY=1
+#export DOCKER_HOST=tcp://192.168.59.103:2376
+
