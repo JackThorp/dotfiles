@@ -2,3 +2,4 @@ _Store
 *.swp
 tmux/resurrect/*
 /env
+vim/plugged

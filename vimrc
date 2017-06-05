@@ -1,19 +1,18 @@
 set nocompatible	" be iMproved
+
 " ---------- My Plugins ----------------------------------
-"Plugin 'majutsushi/tagbar'
-"Plugin 'tomasr/molokai'
-"Plugin 'atom/fuzzy-finder'
-"Plugin 'scrooloose/syntastic'
-"Plugin 'digitaltoad/vim-jade'
-"Plugin 'kchmck/vim-coffee-script'
-"Plugin 'vim-scripts/taglist.vim'
-"Plugin 'jcf/vim-latex'
-"Plugin 'scrooloose/nerdtree'
+"Plug 'majutsushi/tagbar'
+"Plug 'atom/fuzzy-finder'
+"Plug 'digitaltoad/vim-jade'
+"Plug 'kchmck/vim-coffee-script'
+"Plug 'jcf/vim-latex'
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
-Plug 'Raimondi/delimitMate'   " Auto closes brackets and stuff
+Plug 'Raimondi/delimitMate'     " Auto closes brackets and stuff
+Plug 'scrooloose/syntastic'     " Syntax checker
+Plug 'vim-scripts/taglist.vim'  " source code browser READ MANUAL!
 
 call plug#end()
 
