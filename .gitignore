@@ -3,3 +3,5 @@ _Store
 tmux/resurrect/*
 /env
 vim/plugged
+vim/black
+vim/bundle

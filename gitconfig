@@ -1,3 +1,5 @@
 [user]
 	name = Jack Thorp
 	email = jackthorp13@gmail.com
+[commit]
+	template = /Users/jackthorp/.git_commit_msg.txt

@@ -36,7 +36,9 @@ _pwd_ps1()
 # TODO work out this grep regex...
 _git_ps1()
 {
-  local branch=$(git branch 2>/dev/null | grep -oe '(?<=\*\s).*')
+  # local branch=$(git branch 2>/dev/null | grep -oe '(?<=\*\s).*')
+  # local branch=$(git branch 2>/dev/null | grep -oe '[^\*\s].*')
+  local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
   [[ -n $branch ]] && echo " ${D}on ${PINK}($branch)"
 }
 
@@ -45,8 +47,8 @@ HOST=`hostname`
 [ -e ~/.hostname ] && source ~/.hostname
 
 # Set to the debian colors
-PS1='\[${PINK}\]\u'                          # username
-#PS1=$PS1'\[${D}\]@\[${ORANGE}\]$HOST '      # hostname
+PS1='\[${GREEN}\]\u'                          # username
+# PS1=$PS1'\[${D}\]@\[${ORANGE}\]$HOST '      # hostname
 PS1=$PS1' \[${MAGENTA}\]$(_pwd_ps1) '         # prwrkdir
-#PS1=$PS1'$(_git_ps1) \n'                      # gitbrnch
-PS1=$PS1'\[${D}\]~>\[${CLRCOL}\] '  # $ > grey
+PS1=$PS1'$(_git_ps1)'                      # gitbrnch
+PS1=$PS1'\[${D}\] >>\[${CLRCOL}\] '  # $ > grey

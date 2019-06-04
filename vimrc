@@ -11,10 +11,19 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
 Plug 'Raimondi/delimitMate'     " Auto closes brackets and stuff
-Plug 'scrooloose/syntastic'     " Syntax checker
+" Plug 'scrooloose/syntastic'     " Syntax checker
+Plug 'python/black'             
+Plug 'w0rp/ale'                 " ALE syntax checker
 Plug 'vim-scripts/taglist.vim'  " source code browser READ MANUAL!
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy Finder
+Plug 'airblade/vim-gitgutter'   " see diffs next to line number
+Plug 'tmhedberg/SimpylFold'     " Python code block folding
+Plug 'vim-airline/vim-airline'  " Pimp the status bar
+Plug 'davidhalter/jedi-vim'     " Python autocompletion & goto
+Plug 'tpope/vim-fugitive'       " Git helpers like blame..
 
 call plug#end()
+
 
 syntax on " Enables syntax processing in vim
 filetype plugin indent on	" enables filetype detection
@@ -36,6 +45,8 @@ set tabstop=2		  " Number of visual spaces a <Tab> counts for
 set softtabstop=2	" Number of visual spaces a <Tab> counts for whilst editing
 set shiftwidth=2	" Number of space the shift (>>, <<) commands uses
 
+" -------- ALE Syntax Checker ------------------------------
+let g:ale_python_black_options = "--line-length=99"
 
 " -------- UI & General Settings ----------------------------
 set number 			" Turn on numbers
@@ -45,7 +56,8 @@ set directory=~/.vim/swapfiles//	" Set swapfile location outside wd
 set showcmd     " show last command in bottom right"
 set cursorline  " highlught line of cursor
 set showmatch   " highlight matching paranthesis
-
+set bs=2        " Set backspace so delete key works in insert mode
+set colorcolumn=99
 
 " -------- Search settings ----------------------------
 set hlsearch		" Highlight all matches of a search
