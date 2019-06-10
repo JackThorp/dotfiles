@@ -16,10 +16,12 @@ Plug 'python/black'
 Plug 'w0rp/ale'                 " ALE syntax checker
 Plug 'vim-scripts/taglist.vim'  " source code browser READ MANUAL!
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " Fuzzy Finder
+Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'   " see diffs next to line number
 Plug 'tmhedberg/SimpylFold'     " Python code block folding
 Plug 'vim-airline/vim-airline'  " Pimp the status bar
-Plug 'davidhalter/jedi-vim'     " Python autocompletion & goto
+" Plug 'davidhalter/jedi-vim'     " Python autocompletion & goto
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'tpope/vim-fugitive'       " Git helpers like blame..
 
 call plug#end()
@@ -51,6 +53,7 @@ let g:ale_python_black_options = "--line-length=99"
 " -------- UI & General Settings ----------------------------
 set number 			" Turn on numbers
 set ruler				" Show line and column
+set rnu         " Relative line numbers
 set mouse=a			" Enable mouse scrolling, pane selection
 set directory=~/.vim/swapfiles//	" Set swapfile location outside wd
 set showcmd     " show last command in bottom right"
@@ -61,7 +64,27 @@ set colorcolumn=99
 
 " -------- Search settings ----------------------------
 set hlsearch		" Highlight all matches of a search
-nnoremap  <leader><space> :nohlsearch<CR> " leader key is \"
+" nnoremap  <leader><space> :nohlsearch<CR> " leader key is \"
 set incsearch		" Show matches whilst searching
 set ignorecase		" Ignore case of normal letters
 
+" Use rg for the :grep program (as it's faster than ag)
+"   * use "-t html" to only search one filetype
+"   * use "-w" to match on word boundaries
+if executable('rg')
+    set grepprg=rg\ --vimgrep
+    set grepformat=%f:%l:%c:%m
+endif
+
+" Search codebase for word under cursor (v useful)
+nnoremap gw :grep <cword> . <CR>
+
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>

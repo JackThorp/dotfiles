@@ -62,6 +62,7 @@ source ~/.bash_ps1
 
 ### LOAD NVM ###
 export NVM_DIR="$HOME/.nvm"
+[ -d $NVM_DIR ] || mkdir $NVM_DIR
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # -s => file exists. So source and load nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

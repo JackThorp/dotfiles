@@ -39,7 +39,7 @@ _git_ps1()
   # local branch=$(git branch 2>/dev/null | grep -oe '(?<=\*\s).*')
   # local branch=$(git branch 2>/dev/null | grep -oe '[^\*\s].*')
   local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
-  [[ -n $branch ]] && echo " ${D}on ${PINK}($branch)"
+  [[ -n $branch ]] && echo "($branch)"
 }
 
 # Configure host, allow for alias is provided
@@ -47,8 +47,8 @@ HOST=`hostname`
 [ -e ~/.hostname ] && source ~/.hostname
 
 # Set to the debian colors
-PS1='\[${GREEN}\]\u'                          # username
+PS1='\[${CYAN}\]\u'                          # username
 # PS1=$PS1'\[${D}\]@\[${ORANGE}\]$HOST '      # hostname
-PS1=$PS1' \[${MAGENTA}\]$(_pwd_ps1) '         # prwrkdir
-PS1=$PS1'$(_git_ps1)'                      # gitbrnch
+PS1=$PS1' \[${ORANGE}\]$(_pwd_ps1) '         # prwrkdir
+PS1=$PS1'\[${D}\] on \[${PINK}\]$(_git_ps1)'                      # gitbrnch
 PS1=$PS1'\[${D}\] >>\[${CLRCOL}\] '  # $ > grey
