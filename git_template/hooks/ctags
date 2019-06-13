@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Prints the running commands or modifies shell behaviour in some other way..
+set -e
+
+# rev-parse (revision parse) will return the .git dir
+dir="`git rev-parse --git-dir`"
+
+# An Exit trap. If this script exits (terminated early) then the trap code gets executed.
+trap 'rm -f "$dir/$$.tags"' EXIT
+
+# list the files under source control and pass them to ctags
+# --tag-relative : save the tags as relative to the dir of tags file rather than relative to
+# current working directory for this script.
+# - (hyphen) specifies to use stdin rather than an arg. This is how we consume the lhs of pipe (i think)
+# -L specifies a file to be tagged
+# -f location of tag file
+git ls-files | ctags --tag-relative -L - -f "$dir/$$.tags" --languages=-python,sql,javascript
+
+# fugtitive automatically looks for tags file in .git/tags
+mv "$dir/$$.tags" "$dir/tags"

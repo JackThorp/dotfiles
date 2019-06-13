@@ -2,4 +2,8 @@
 	name = Jack Thorp
 	email = jackthorp13@gmail.com
 [commit]
-	template = /Users/jackthorp/.git_commit_msg.txt
+	template = ~/.git_template/git_commit_msg.txt
+[init]
+	templatedir = ~/.git_template
+[alias]
+	ctags = !.git/hooks/ctags

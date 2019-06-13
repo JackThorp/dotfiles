@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# route stderr 
+# 2 = std err
+# 1 = std out
+#   = std in?
+# &2 = fd for stderr
+# &1 = fd for stdout
+# &>  = both stderr + stdout
+# & at end of command = run in background
+
+# redirect stdout to nowhere, redirect stderr to stdout
+# isn't stderr already going to stdout?
+.git/hooks/ctags >/dev/null 2>&1 &
