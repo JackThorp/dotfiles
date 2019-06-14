@@ -20,6 +20,7 @@ Plug 'airblade/vim-gitgutter'         " see diffs next to line number
 Plug 'tmhedberg/SimpylFold'           " Python code block folding
 Plug 'vim-airline/vim-airline'        " Pimp the status bar
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+" Plug 'davidhalter/jedi-vim'
 Plug 'tpope/vim-fugitive'             " Git helpers like blame..
 " Plug 'ludovicchabant/vim-gutentags'   " Depends on exhuberant ctags installed on system
 
@@ -67,6 +68,7 @@ set colorcolumn=99
 set cmdheight=2     " Size of command window.
 set splitbelow
 set splitright
+map <Space> <Leader>
 
 
 "--------- Files & Buffers -------------------------------
@@ -101,6 +103,7 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <leader>f :Files<CR>      
 nmap <leader>h :History<CR>
 nmap <leader>l :BLines<CR>
+nmap <leader>r :Rg <CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>

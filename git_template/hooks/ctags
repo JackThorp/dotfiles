@@ -15,7 +15,7 @@ trap 'rm -f "$dir/$$.tags"' EXIT
 # - (hyphen) specifies to use stdin rather than an arg. This is how we consume the lhs of pipe (i think)
 # -L specifies a file to be tagged
 # -f location of tag file
-git ls-files | ctags --tag-relative -L - -f "$dir/$$.tags" --languages=-python,sql,javascript
+git ls-files | ctags --tag-relative -L - -f "$dir/$$.tags" --languages=sql,javascript
 
 # fugtitive automatically looks for tags file in .git/tags
 mv "$dir/$$.tags" "$dir/tags"
