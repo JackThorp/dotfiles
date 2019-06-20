@@ -4,5 +4,5 @@
 
 " b is a namespace for an internal variable. b: stands for buffer variable.
 " see :help internal-variables
-let b:ale_fixers = ['black', 'isort'] " Haven't worked out how to get isort working with docker yet. Needs access to requirements.
+let b:ale_fixers = ['black'] " Haven't worked out how to get isort working with docker yet. Needs access to requirements.
 let b:ale_fix_on_save = 1

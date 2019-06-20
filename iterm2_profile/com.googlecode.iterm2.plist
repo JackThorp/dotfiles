@@ -54,7 +54,7 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>269 1135 918 452 0 900 2560 1417 </string>
+	<string>269 1135 796 486 0 900 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 923 2560 1394 0 900 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
@@ -717,13 +717,15 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-06-12T08:34:53Z</date>
+	<date>2019-06-19T08:28:19Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>4</integer>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>iTerm Version</key>
 	<string>3.2.9</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>

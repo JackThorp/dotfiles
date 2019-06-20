@@ -13,16 +13,17 @@ Plug 'scrooloose/nerdtree'
 Plug 'Raimondi/delimitMate'            " Auto closes brackets and stuff
 Plug 'python/black'             
 Plug 'w0rp/ale'                       " ALE syntax checker
-Plug 'vim-scripts/taglist.vim'        " source code browser READ MANUAL!
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all' } " Fuzzy Finder
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'         " see diffs next to line number
 Plug 'tmhedberg/SimpylFold'           " Python code block folding
 Plug 'vim-airline/vim-airline'        " Pimp the status bar
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-" Plug 'davidhalter/jedi-vim'
 Plug 'tpope/vim-fugitive'             " Git helpers like blame..
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'davidhalter/jedi-vim'
+Plug 'NLKNguyen/papercolor-theme'
 " Plug 'ludovicchabant/vim-gutentags'   " Depends on exhuberant ctags installed on system
+" Plug 'vim-scripts/taglist.vim'        " source code browser READ MANUAL!
 
 call plug#end()
 
@@ -34,7 +35,8 @@ au BufNewFile,BufRead *.ract set filetype=html
 
 
 " --------- Colours and schemes --------------------------
-colorscheme badwolf
+colorscheme PaperColor
+set background=dark
 
 
 " --------- Indentation and formatting ------------------
@@ -51,8 +53,8 @@ set shiftwidth=2	" Number of space the shift (>>, <<) commands uses
 
 " -------- Syntax & Static Analysis ------------------------------
 let g:ale_python_black_options = "--line-length=99"
-let g:airline#extensions#coc#enabled = 1
-let g:ale_python_isort_executable = 'docker-compose exec support isort'
+" let g:airline#extensions#coc#enabled = 1
+let g:ale_python_isort_executable = '~/scripts/docker-isort.sh'
 let g:ale_python_isort_use_global = 1
 
 " -------- UI & General Settings ----------------------------
@@ -104,6 +106,7 @@ nmap <leader>f :Files<CR>
 nmap <leader>h :History<CR>
 nmap <leader>l :BLines<CR>
 nmap <leader>r :Rg <CR>
+" nmap <leader>t :Tags <CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
