@@ -49,10 +49,6 @@ fi
 
 export FZF_DEFAULT_COMMAND="rg --files -g '!{.git,node_modules}'"
 
-### Stop stderr of boot2docker ip showin in terminal
-docker-ip() {
-  boot2docker ip 2> /dev/null
-}
 # Force color output in tree
 alias tree='tree -C'
 

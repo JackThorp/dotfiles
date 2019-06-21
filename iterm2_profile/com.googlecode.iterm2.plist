@@ -14,6 +14,12 @@
 	<string>manual</string>
 	<key>Default Bookmark Guid</key>
 	<string>897281E9-FFBF-4522-965F-08E6E0642DF1</string>
+	<key>DisableFullscreenTransparency</key>
+	<false/>
+	<key>HideScrollbar</key>
+	<false/>
+	<key>HideTabNumber</key>
+	<false/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
@@ -54,9 +60,9 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>269 1135 796 486 0 900 2560 1417 </string>
+	<string>269 1135 796 486 0 900 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 923 2560 1394 0 900 2560 1417 </string>
+	<string>0 923 2560 1417 0 900 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1783 -359 570 452 1440 -540 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -717,11 +723,17 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-06-19T08:28:19Z</date>
+	<date>2019-06-20T08:28:20Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
+	<key>ShowFullScreenTabBar</key>
+	<false/>
 	<key>TabStyleWithAutomaticOption</key>
-	<integer>4</integer>
+	<integer>3</integer>
+	<key>TabViewType</key>
+	<integer>0</integer>
+	<key>UseBorder</key>
+	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>findMode_iTerm</key>

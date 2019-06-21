@@ -27,6 +27,10 @@ Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
+" Edit & source vimrc shortcuts
+nmap <leader>ev :tabe ~/.vimrc<cr>
+nmap <leader>sv :source ~/.vimrc<cr>
+map <Space> <Leader>
 
 syntax on " Enables syntax processing in vim
 filetype plugin indent on	" enables filetype detection
@@ -37,7 +41,6 @@ au BufNewFile,BufRead *.ract set filetype=html
 " --------- Colours and schemes --------------------------
 colorscheme PaperColor
 set background=dark
-
 
 " --------- Indentation and formatting ------------------
 set autoindent		" Copy indent from previous line
@@ -68,10 +71,18 @@ set showmatch       " highlight matching paranthesis
 set bs=2            " Set backspace so delete key works in insert mode
 set colorcolumn=99
 set cmdheight=2     " Size of command window.
-set splitbelow
-set splitright
-map <Space> <Leader>
+set splitbelow      " Always open new horizontal split at beneath
+set splitright      " Always open new vertical split on the right"
+set title           " set tab name to file name
 
+" Drop the w for moving between windows and tabs
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+" shift h and shift l to cycle tabs!
+nnoremap H gT
+nnoremap L gt
 
 "--------- Files & Buffers -------------------------------
 set autoread                      " Set to autoread a file when it is changed from the outside
@@ -82,9 +93,27 @@ set updatetime=300                " Time before changes are written to disk
 
 " -------- Navigation & Search settings ----------------------------
 set hlsearch		" Highlight all matches of a search
-" nnoremap  <leader><space> :nohlsearch<CR> " leader key is \"
+nnoremap  <leader><bs> :nohlsearch<CR> 
 set incsearch		" Show matches whilst searching
 set ignorecase		" Ignore case of normal letters
+
+" pull <cword> onto search/command line
+nnoremap sw /<C-R><C-W>/<CR>
+
+let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_buffers_jump = 1 " Jump to existing buffer if open (I think)
+
+" Run :Rg! (with bang) and get full screen with preview window
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+" Run :Files! to get fullscreen + preview
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " Use rg for the :grep program (as it's faster than ag)
 "   * use "-t html" to only search one filetype
@@ -105,8 +134,8 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <leader>f :Files<CR>      
 nmap <leader>h :History<CR>
 nmap <leader>l :BLines<CR>
-nmap <leader>r :Rg <CR>
-" nmap <leader>t :Tags <CR>
+nmap <leader>s :Rg <CR>
+nmap <leader>t :Tags <CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
