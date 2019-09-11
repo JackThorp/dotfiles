@@ -1,5 +1,9 @@
 #!/bin/sh
 
+source ~/.bash_aliases
+source ~/.bash_ps1
+
+
 ### SELECT GNU COMMANDS ###########################################
 # For those commands that require a g prefix, select if exist
 # Lawrence! WHAT IS THE G prefix for? Won't this still create alias even if g prefix doesn't exist?
@@ -8,6 +12,9 @@ for cmd in $cmds
 do
   $(which g$cmd >/dev/null 2>/dev/null) && alias $cmd="g$cmd"
 done
+
+
+
 
 ### CONFIGURE TERMINAL COLORS #####################################
 # set the ls folder and file support
@@ -31,6 +38,9 @@ if [ -n "$force_color_prompt" ]; then
   fi
 fi
 
+
+
+
 ### CONFIGURE LS AND GREP ###########################################
 # Alias ls colors if supported
 $(ls --color=always &>/dev/null) && alias ls='ls --color=always'
@@ -47,13 +57,17 @@ else
 fi
 
 
+# FZF needs a list of files to perform fuzzy find on
 export FZF_DEFAULT_COMMAND="rg --files -g '!{.git,node_modules}'"
 
 # Force color output in tree
 alias tree='tree -C'
 
-source ~/.bash_aliases
-source ~/.bash_ps1
+### CONFIGURE GIT ###################################################
+source ~/.git-completion.bash
+
+
+
 
 ### NODE VERSION MANAGER ###########################################
 # NODE_PATH not set as all dependencies should be put in node_modules. Globals shouldn't be required from
@@ -67,12 +81,6 @@ export NVM_DIR="$HOME/.nvm"
 
 #export GOPATH=$HOME/go
 export EDITOR=vim
-#export CLOUDSTACK_API_URL="https://cloudstack.doc.ic.ac.uk:8443/client/api"
-#export CLOUDSTACK_API_KEY="JObiUuA1sLKH_FZNrbICqE_6hnqp2yjZBIOQar1EfQf1aVu0f9K1zLMycXBDpu2izXp2kvIZ3OrHWhjsYRRjYg"
-#export CLOUDSTACK_SECRET_KEY="Sr1AEjkm_8Ub7Ask6hDRI1AWJ007_pPyaSP_DDcQzT0WtV3zowT_g4yxq-4NDvDxTq3AGvejYnIicqjOs1ebBQ"
-#export DOCKER_CERT_PATH=/Users/jackthorp/.boot2docker/certs/boot2docker-vm
-#export DOCKER_TLS_VERIFY=1
-#export DOCKER_HOST=tcp://192.168.59.103:2376
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

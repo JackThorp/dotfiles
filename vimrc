@@ -16,12 +16,13 @@ Plug 'w0rp/ale'                       " ALE syntax checker
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all' } " Fuzzy Finder
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'         " see diffs next to line number
-Plug 'tmhedberg/SimpylFold'           " Python code block folding
-Plug 'vim-airline/vim-airline'        " Pimp the status bar
+" Plug 'tmhedberg/SimpylFold'           " Python code block folding
+" Plug 'vim-airline/vim-airline'        " Pimp the status bar
 Plug 'tpope/vim-fugitive'             " Git helpers like blame..
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'davidhalter/jedi-vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'jdsimcoe/abstract.vim'
 " Plug 'ludovicchabant/vim-gutentags'   " Depends on exhuberant ctags installed on system
 " Plug 'vim-scripts/taglist.vim'        " source code browser READ MANUAL!
 
@@ -39,8 +40,8 @@ au BufNewFile,BufRead *.ract set filetype=html
 
 
 " --------- Colours and schemes --------------------------
-colorscheme PaperColor
-set background=dark
+colorscheme abstract
+" set background=dark
 
 " --------- Indentation and formatting ------------------
 set autoindent		" Copy indent from previous line
@@ -52,13 +53,14 @@ set scrolloff=5		" Minimal number of lines above/below cursor on scrolling
 set tabstop=2		  " Number of visual spaces a <Tab> counts for
 set softtabstop=2	" Number of visual spaces a <Tab> counts for whilst editing
 set shiftwidth=2	" Number of space the shift (>>, <<) commands uses
+set foldmethod=indent " Works well for python. Maybe set ft rule at some point
 
 
 " -------- Syntax & Static Analysis ------------------------------
 let g:ale_python_black_options = "--line-length=99"
 " let g:airline#extensions#coc#enabled = 1
-let g:ale_python_isort_executable = '~/scripts/docker-isort.sh'
-let g:ale_python_isort_use_global = 1
+"let g:ale_python_isort_executable = '~/scripts/docker-isort.sh'
+"let g:ale_python_isort_use_global = 1
 
 " -------- UI & General Settings ----------------------------
 set number 			    " Turn on numbers
@@ -70,10 +72,11 @@ set cursorline      " highlught line of cursor
 set showmatch       " highlight matching paranthesis
 set bs=2            " Set backspace so delete key works in insert mode
 set colorcolumn=99
-set cmdheight=2     " Size of command window.
+set cmdheight=1     " Size of command window.
 set splitbelow      " Always open new horizontal split at beneath
 set splitright      " Always open new vertical split on the right"
 set title           " set tab name to file name
+set laststatus=2    " Always show file name in status bar. Even if one buffer open
 
 " Drop the w for moving between windows and tabs
 map <C-j> <C-W>j
@@ -83,6 +86,11 @@ map <C-l> <C-W>l
 " shift h and shift l to cycle tabs!
 nnoremap H gT
 nnoremap L gt
+
+
+" Copy and paste
+vmap <leader>c "*y
+vmap <leader>d "*d
 
 "--------- Files & Buffers -------------------------------
 set autoread                      " Set to autoread a file when it is changed from the outside
@@ -98,9 +106,12 @@ set incsearch		" Show matches whilst searching
 set ignorecase		" Ignore case of normal letters
 
 " pull <cword> onto search/command line
+" nnoremap <leader> cw "*yiw
 nnoremap sw /<C-R><C-W>/<CR>
+nnoremap fw :Rg <C-R><C-W><CR>
 
 let g:fzf_layout = { 'down': '~30%' }
+" let g:fzf_layout = { 'layout': 'reverse'}
 let g:fzf_buffers_jump = 1 " Jump to existing buffer if open (I think)
 
 " Run :Rg! (with bang) and get full screen with preview window
@@ -114,6 +125,20 @@ command! -bang -nargs=* Rg
 " Run :Files! to get fullscreen + preview
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+" Add ctrl-q to build quick fix list
+let g:fzf_action = {
+ \ 'ctrl-q': function('s:build_quickfix_list'),
+ \ 'ctrl-t': 'tab split',
+ \ 'ctrl-x': 'split',
+ \ 'ctrl-v': 'vsplit' }
 
 " Use rg for the :grep program (as it's faster than ag)
 "   * use "-t html" to only search one filetype
@@ -134,13 +159,26 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <leader>f :Files<CR>      
 nmap <leader>h :History<CR>
 nmap <leader>l :BLines<CR>
+nmap <leader>b :Buffers<CR>
 nmap <leader>s :Rg <CR>
 nmap <leader>t :Tags <CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-"let g:gutentags_project_root = ['.git']
-"let g:gutentags_generate_on_new = 1
-"let g:gutentags_generate_on_write = 1
+function! TestCurrent()
+  execute("!clear && " . expand("%p") . <C-R><C-W>)
+endfunction
+" ------------- Functions -----------------------------
+map <leader>rt :call TestCurrent() <CR>
 
+function! RunISort() abort 
+    try
+        let b:ale_fixers={'python': ['isort',]}
+        ALEFix
+    finally
+        unlet b:ale_fixers
+    endtry
+endfunction
+
+command! RunISort call RunISort()
