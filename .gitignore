@@ -5,3 +5,4 @@ tmux/resurrect/*
 vim/plugged
 vim/black
 vim/bundle
+vim/swapfiles
