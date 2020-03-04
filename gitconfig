@@ -1,9 +1,30 @@
 [user]
 	name = Jack Thorp
 	email = jackthorp13@gmail.com
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
 [commit]
 	template = ~/.git_template/git_commit_msg.txt
 [init]
 	templatedir = ~/.git_template
 [alias]
 	ctags = !.git/hooks/ctags
+  prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -d
