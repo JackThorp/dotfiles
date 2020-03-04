@@ -34,10 +34,4 @@ for f in `ls | grep -iv "symlink"`; do
   ln -s $dir/$f ~/.$f
 done
 
-# if vundle not installed
-[[ -d $dir/vim/bundle/Vundle.vim ]] || (
-  echo Installing vundle
-  git clone https://github.com/gmarik/Vundle.vim $dir/vim/bundle/Vundle.vim
-)
-
 echo done!
