@@ -25,6 +25,12 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'jdsimcoe/abstract.vim'
 " Plug 'ludovicchabant/vim-gutentags'   " Depends on exhuberant ctags installed on system
 " Plug 'vim-scripts/taglist.vim'        " source code browser READ MANUAL!
+Plug 'terryma/vim-smooth-scroll'        " Smooth scrolling up and down the buffer
+Plug 'SirVer/ultisnips'                 " Snippet expander
+Plug 'honza/vim-snippets'               " ??
+
+" Plug 'ycm-core/YouCompleteMe'           " Text completion TODO GET THIS
+
 
 call plug#end()
 
@@ -41,7 +47,7 @@ au BufNewFile,BufRead *.ract set filetype=html
 
 " --------- Colours and schemes --------------------------
 colorscheme abstract
-" set background=dark
+set background=dark
 
 " --------- Indentation and formatting ------------------
 set autoindent		" Copy indent from previous line
@@ -87,17 +93,32 @@ map <C-l> <C-W>l
 nnoremap H gT
 nnoremap L gt
 
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 15, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 15, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 15, 2)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 15, 2)<CR>
 
-" Copy and paste
+" -------- Text Editing -----------------------------------
+" Copy and cut
 vmap <leader>c "*y
-vmap <leader>d "*d
+nmap <leader>yy "+yy"
+
+" Renane variable
+nnoremap <leader>rn :%s/<C-R><C-W>/
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<A-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "--------- Files & Buffers -------------------------------
 set autoread                      " Set to autoread a file when it is changed from the outside
+" au CursorHold,CursorHoldI * checktime " Run checktime to auroread when cursor still for a few secs
 set directory=~/.vim/swapfiles//	" Set swapfile location outside wd
 set hidden                        " Don't have to save or discrad to hide the buffer
 set updatetime=300                " Time before changes are written to disk 
 
+" TODO shortcut for ':!mkdir -p %:h' which will create intermediate dirs afte :e
 
 " -------- Navigation & Search settings ----------------------------
 set hlsearch		" Highlight all matches of a search
@@ -160,8 +181,9 @@ nmap <leader>f :Files<CR>
 nmap <leader>h :History<CR>
 nmap <leader>l :BLines<CR>
 nmap <leader>b :Buffers<CR>
-nmap <leader>s :Rg <CR>
-nmap <leader>t :Tags <CR>
+nmap <leader>rg :Rg 
+nmap <leader>t :Tags 
+nmap <leader>d :BTags <CR>
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
