@@ -1,8 +1,16 @@
-#!/bin/sh
+#!/bin/zsh
+# This config is run for login shells and for interactive shells
 
+# Revaluate prompt before everytime before displaying
+setopt prompt_subst
+source ~/.zsh/zsh_ps1
 source ~/.shell_aliases
-source ~/.bash/bash_ps1
 
+### CONFIGURE GIT ###################################################
+zstyle ':completion:*:*:git:*' script ~/.bash/git-completion.bash
+fpath=(~/.zsh $fpath)
+
+autoload -Uz compinit && compinit
 
 ### SELECT GNU COMMANDS ###########################################
 # For those commands that require a g prefix, select if exist
@@ -12,8 +20,6 @@ for cmd in $cmds
 do
   $(which g$cmd >/dev/null 2>/dev/null) && alias $cmd="g$cmd"
 done
-
-
 
 
 ### CONFIGURE TERMINAL COLORS #####################################
@@ -39,8 +45,6 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 
-
-
 ### CONFIGURE LS AND GREP ###########################################
 # Alias ls colors if supported
 $(ls --color=always &>/dev/null) && alias ls='ls --color=always'
@@ -63,25 +67,10 @@ export FZF_DEFAULT_COMMAND="rg --files -g '!{.git,node_modules}'"
 # Force color output in tree
 alias tree='tree -C'
 
-### CONFIGURE GIT ###################################################
-source ~/.bash/git-completion.bash
-
-
-### NODE VERSION MANAGER ###########################################
-# NODE_PATH not set as all dependencies should be put in node_modules. Globals shouldn't be required from
-# within a node application? NVM handles putting globals on the PATH. 
-
-### LOAD NVM ###
-export NVM_DIR="$HOME/.nvm"
-[ -d $NVM_DIR ] || mkdir $NVM_DIR
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # -s => file exists. So source and load nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-#export GOPATH=$HOME/go
 export EDITOR=vim
 
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ### KRAKEN ENV VARS
 export TENTACLIO__SECRETS_FILE=~/.tentaclio.yaml
@@ -92,3 +81,19 @@ export AWS_PROFILE=oe-prod
 pyclean () {
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
 }
+
+eval "$(pyenv init --path)"
+export WORKON_HOME=$HOME/.virtualenvs
+# eval "$(pyenv virtualenvwrapper-init -)"
+# source "$(pyenv which virtualenvwrapper.sh)"
+source "/usr/local/bin/virtualenvwrapper.sh"
+
+# Colocate pycahce files so empty src directories are not maintained
+export PYTHONPYCACHEPREFIX=~/.cache/cpython
+
+# RabbitMQ
+export PATH=/usr/local/sbin:$PATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

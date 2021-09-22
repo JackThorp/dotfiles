@@ -1,0 +1,54 @@
+#!/bin/zsh
+
+### CONFIGURE PROMPT ###########################################################
+_trunc_path()
+{
+  # How many characters of the $PWD should be kept
+  local pwdmaxlen=30
+  local wd=$1
+
+  #   Indicator that there has been directory truncation:
+  local trunc_symbol="..."
+  if [ "${#wd}" -gt $pwdmaxlen ]
+  then
+    local pwdoffset=$(( ${#wd} - $pwdmaxlen ))
+    newPWD=`echo -e ${trunc_symbol}${wd:$pwdoffset:$pwdmaxlen} | sed 's/^\.\.\.\([^/]*\)/.../g'`
+  else
+    newPWD=$wd
+  fi
+  echo -e $newPWD
+}
+
+_pwd_ps1()
+{
+  # Include -P to resolve symlinks
+  local wd=`pwd` # -P`
+
+  local git_root=`git rev-parse --show-toplevel 2>/dev/null`
+  if [ -n "$git_root" ];
+  then # ON GIT
+    local basedir=`dirname $git_root`
+    wd='...'${wd#$basedir}
+  fi
+  echo -e `_trunc_path "$wd"`
+}
+
+# TODO work out this grep regex...
+_git_ps1()
+{
+  # local branch=$(git branch 2>/dev/null | grep -oe '(?<=\*\s).*')
+  # local branch=$(git branch 2>/dev/null | grep -oe '[^\*\s].*')
+  local branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+  [[ -n $branch ]] && echo "($branch) "
+}
+
+local YELLOW='%F{229}'
+local ORANGE='%F{208}'
+local CLRCOL='%f'
+# %. => current directory
+# %n~ => n path parts from home directory
+# %# => # when super user, % otherwise 
+# The prompt string is no re-interpolated each time so the components need defining separately
+local git_info='$(_git_ps1)' 
+
+PS1="${YELLOW}%.${CLRCOL} ${ORANGE}${git_info}${CLRCOL}%# "

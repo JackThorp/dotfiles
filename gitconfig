@@ -28,3 +28,9 @@
 [alias]
 	ctags = !.git/hooks/ctags
   prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -d
+[core]
+	autocrlf = input
+[http]
+	postBuffer = 524288000
+[credential]
+	helper = osxkeychain

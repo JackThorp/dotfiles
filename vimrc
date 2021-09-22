@@ -1,36 +1,35 @@
 set nocompatible	" be iMproved
 
 " ---------- My Plugins ----------------------------------
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree'
+Plug 'dense-analysis/ale'                       " ALE syntax checker
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all' } " Fuzzy Finder
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'         " see diffs next to line number
+" Plug 'vim-airline/vim-airline'        " Pimp the status bar
+Plug 'tpope/vim-fugitive'             " Git helpers like blame..
+Plug 'davidhalter/jedi-vim'
+Plug 'terryma/vim-smooth-scroll'        " Smooth scrolling up and down the buffer
+Plug 'SirVer/ultisnips'                 " Snippet expander
+Plug 'honza/vim-snippets'               " ??
+Plug 'JamshedVesuna/vim-markdown-preview'
+" Colour themes
+Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
+" Unused but maybe useful
+" Plug 'ycm-core/YouCompleteMe'           " Text completion TODO GET THIS
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+" Plug 'Raimondi/delimitMate'            " Auto closes brackets and stuff
+" Plug 'ludovicchabant/vim-gutentags'   " Depends on exhuberant ctags installed on system
+" Plug 'vim-scripts/taglist.vim'        " source code browser READ MANUAL!
 "Plug 'majutsushi/tagbar'
 "Plug 'atom/fuzzy-finder'
 "Plug 'digitaltoad/vim-jade'
 "Plug 'kchmck/vim-coffee-script'
 "Plug 'jcf/vim-latex'
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'scrooloose/nerdtree'
-Plug 'Raimondi/delimitMate'            " Auto closes brackets and stuff
-Plug 'python/black'             
-Plug 'w0rp/ale'                       " ALE syntax checker
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all' } " Fuzzy Finder
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-gitgutter'         " see diffs next to line number
-" Plug 'tmhedberg/SimpylFold'           " Python code block folding
-" Plug 'vim-airline/vim-airline'        " Pimp the status bar
-Plug 'tpope/vim-fugitive'             " Git helpers like blame..
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-Plug 'davidhalter/jedi-vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'jdsimcoe/abstract.vim'
-" Plug 'ludovicchabant/vim-gutentags'   " Depends on exhuberant ctags installed on system
-" Plug 'vim-scripts/taglist.vim'        " source code browser READ MANUAL!
-Plug 'terryma/vim-smooth-scroll'        " Smooth scrolling up and down the buffer
-Plug 'SirVer/ultisnips'                 " Snippet expander
-Plug 'honza/vim-snippets'               " ??
-
-" Plug 'ycm-core/YouCompleteMe'           " Text completion TODO GET THIS
-
 
 call plug#end()
 
@@ -46,7 +45,7 @@ au BufNewFile,BufRead *.ract set filetype=html
 
 
 " --------- Colours and schemes --------------------------
-colorscheme abstract
+colorscheme gruvbox
 set background=dark
 
 " --------- Indentation and formatting ------------------
@@ -63,10 +62,25 @@ set foldmethod=indent " Works well for python. Maybe set ft rule at some point
 
 
 " -------- Syntax & Static Analysis ------------------------------
+let g:ale_linters = {"python": ["flake8"]}
+let g:ale_python_flake8_use_global = 1
+let g:ale_linters_explicit = 1
+
+let g:ale_fixers = {"python": ["black", "isort"]}
+let g:ale_fix_on_save = 1
+let g:ale_python_black_use_global = 1
 let g:ale_python_black_options = "--line-length=99"
+let g:ale_python_isort_use_global = 1
+" Force known third party as requirements.txt doesn't seem to get picked up
+let g:ale_python_isort_options="-o tests"
+
 " let g:airline#extensions#coc#enabled = 1
+" let g:airline#extensions#ale#enabled = 1
 "let g:ale_python_isort_executable = '~/scripts/docker-isort.sh'
 "let g:ale_python_isort_use_global = 1
+"autocmd BufWritePre *.py execute ':Black'
+let vim_markdown_preview_github=1
+let vim_markdown_preview_toggle=2
 
 " -------- UI & General Settings ----------------------------
 set number 			    " Turn on numbers
@@ -103,8 +117,11 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 15, 2)<CR>
 vmap <leader>c "*y
 nmap <leader>yy "+yy"
 
-" Renane variable
+" Rename variable
 nnoremap <leader>rn :%s/<C-R><C-W>/
+" Copy file path. '+' is the clipboard register, @ enables register access
+nnoremap <Leader>fp :let @+=expand('%:.')<CR>
+
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<A-tab>"
@@ -119,6 +136,13 @@ set hidden                        " Don't have to save or discrad to hide the bu
 set updatetime=300                " Time before changes are written to disk 
 
 " TODO shortcut for ':!mkdir -p %:h' which will create intermediate dirs afte :e
+
+" Clear the quick fix list!
+function ClearQuickfixList()
+  call setqflist([])
+endfunction
+command! ClearQuickfixList call ClearQuickfixList()
+nmap <leader>cf :ClearQuickfixList<cr>
 
 " -------- Navigation & Search settings ----------------------------
 set hlsearch		" Highlight all matches of a search
@@ -146,6 +170,9 @@ command! -bang -nargs=* Rg
 " Run :Files! to get fullscreen + preview
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
 " An action can be a reference to a function that processes selected lines
 function! s:build_quickfix_list(lines)
@@ -204,3 +231,10 @@ function! RunISort() abort
 endfunction
 
 command! RunISort call RunISort()
+
+function! CreateUnitTest()
+  let path= expand("%p")
+
+endfunction
+
+map <leader>ut :call CreateUnitTest() <CR>

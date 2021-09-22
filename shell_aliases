@@ -1,0 +1,41 @@
+#!/bin/zsh
+
+# DOCKER COMMANDS
+alias dcu='docker-compose up'
+alias dcr='docker-compose restart'
+alias dcd='docker-compose down'
+alias dce='docker-compose exec'
+
+# GIT COMMANDS
+alias gs='git status'
+alias gco='git commit'
+alias gb='git branch'
+alias gch='git checkout'
+alias gl='git log -n 10 --oneline'
+alias gd='git diff'
+alias ga='git add'
+alias gpf='git push --force-with-lease'
+
+alias wo='workon'
+alias oegb-migrate-kraken='wo kraken-core && cd src && DJANGO_CONFIGURATION=OEGBMigrations DJANGO_SETTINGS_MODULE=octoenergy.settings ./manage.py migrate'
+alias oegb-make-migrations='wo kraken-core && cd src && DJANGO_CONFIGURATION=OEGBMigrations DJANGO_SETTINGS_MODULE=octoenergy.settings ./manage.py makemigrations'
+
+# Local DBs
+alias local-db='cd ~/projects/octodev && dce db psql -U postgres small-consumer'
+
+# Octopus Energy DBs
+alias oe-analytics-test='pgcli -h postgres-analytics-replica.octoenergy.test.octoenergy.internal -U bastion consumer'
+alias oe-analytics-prod='pgcli -h postgres-analytics-replica.octoenergy.prod.octoenergy.internal -U internal_reporter consumer'
+alias oe-consumption-prod='pgcli -h postgres-services.octoenergy.prod.octoenergy.internal -U internal_reporter consumption'
+
+# Eon DBs
+alias eon-analytics-test='pgcli -h postgres-analytics-replica.eonnext.test.kraken.internal -U internal_reporter nov-data-cut'
+alias eon-analytics-test-nov='pgcli -h nov-data-cut.eonnext.test.kraken.internal -U internal_reporter krakencore'
+alias eon-analytics-prod='pgcli -h postgres-analytics-replica.eonnext.prod.kraken.internal -U internal_reporter krakencore'
+alias eon-consumption-prod='pgcli -h postgres-services.eonnext.prod.kraken.internal -U internal_reporter consumption'
+alias eon-mps-prod='pgcli -h postgres-services.eonnext.prod.kraken.internal -U internal_reporter meterpoints'
+
+# Good DBs
+alias good-analytics-prod='pgcli -h postgres-analytics-replica.good.prod.kraken.internal -U internal-reporting krakencore'
+alias good-analytics-test='pgcli -h postgres-analytics-replica.good.test.kraken.internal -U goodenergy-reporting krakencore'
+
