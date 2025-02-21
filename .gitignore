@@ -2,7 +2,4 @@ _Store
 *.swp
 tmux/resurrect/*
 /env
-vim/plugged
-vim/black
-vim/bundle
-vim/swapfiles
+vim/*

@@ -10,6 +10,7 @@ source ~/.shell_aliases
 zstyle ':completion:*:*:git:*' script ~/.bash/git-completion.bash
 fpath=(~/.zsh $fpath)
 
+# See man zshbuiltins for explanation of autoload
 autoload -Uz compinit && compinit
 
 ### SELECT GNU COMMANDS ###########################################
@@ -72,21 +73,15 @@ export EDITOR=vim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-### KRAKEN ENV VARS
-export TENTACLIO__SECRETS_FILE=~/.tentaclio.yaml
-export AWS_PROFILE=oe-prod
-
 
 ### PYTHON ###
 pyclean () {
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
 }
 
-eval "$(pyenv init --path)"
 export WORKON_HOME=$HOME/.virtualenvs
-# eval "$(pyenv virtualenvwrapper-init -)"
-# source "$(pyenv which virtualenvwrapper.sh)"
-source "/usr/local/bin/virtualenvwrapper.sh"
+export PROJECT_HOME=$HOME/projects
+source "$(pyenv which virtualenvwrapper.sh)"
 
 # Colocate pycahce files so empty src directories are not maintained
 export PYTHONPYCACHEPREFIX=~/.cache/cpython
@@ -94,6 +89,15 @@ export PYTHONPYCACHEPREFIX=~/.cache/cpython
 # RabbitMQ
 export PATH=/usr/local/sbin:$PATH
 
+# This was slowing down new terminal load. Uncomment if I ever need NVM more regularly.
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PG_CLIENT="pgcli"
+
+# Created by `pipx` on 2021-10-12 13:06:54
+export PATH="$PATH:/Users/jackthorp/.local/bin"
+export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+
+export KRAKEN_DB_CONCURRENCY=4

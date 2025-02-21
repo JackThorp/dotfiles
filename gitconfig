@@ -27,7 +27,7 @@
 	templatedir = ~/.git_template
 [alias]
 	ctags = !.git/hooks/ctags
-  prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -d
+	prune-branches = !git remote prune origin && git branch -vv | grep ': gone]' | awk '{print }' | xargs git branch -d
 [core]
 	autocrlf = input
 [http]
