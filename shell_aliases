@@ -1,13 +1,6 @@
 #!/bin/zsh
 
-alias brew='arch -x86_64 brew'
-
-# DOCKER COMMANDS
-alias dcu='docker-compose up'
-alias dcr='docker-compose restart'
-alias dcd='docker-compose down'
-alias dce='docker-compose exec'
-
+alias nv='nvim'
 # GIT COMMANDS
 alias gs='git status'
 alias gco='git commit'
