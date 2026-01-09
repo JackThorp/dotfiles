@@ -34,3 +34,5 @@
 	postBuffer = 524288000
 [credential]
 	helper = osxkeychain
+[url "ssh://git@github.com/octoenergy/"]
+	insteadof = https://github.com/octoenergy/
