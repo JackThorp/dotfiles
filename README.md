@@ -1,6 +1,23 @@
-# Git Templates
-Run git config --global init.templatedir '~/.git_template' to set the .git_template dotfile
-as the default template file for new repositories. You can run git init inside existing 
-repositories to install (new) templates.
-Running git config --global alias.ctags '!.git/hooks/ctags' will set up a git ctags command to 
-execute the ctags hook in the current repo.
+# ...THE DOTFILES...
+
+This is my repository for the config files required for various applications and tools that I 
+frequently use. In order to set up a new computer with all of my familiar settings I should only
+need to clone this repo and then run the `./install.zsh` script. 
+
+## How to use
+Clone this repo **into your home directory** `cd` into it and then run `./install.zsh`. 
+
+## How `./install.zsh` works?
+The install script works by using the `stow` [command](https://www.gnu.org/software/stow/). There
+are numerous videos and blogs about managing dotfiles with `stow` if you give it a google. The
+reason I chose to use stow was because I found I had some pieces of config on my work computer that
+I didn't want to push up to this repository. My previous install script simply symlinked every other
+iterm apart from the install script to the home directory. This meant a wholesale link of the
+config directory. `stow` is cool because when you call it on a directory e.g. `stow gh` it will
+look at the target directory (by default the parent hence cloning this project into your home 
+directory) and add only what is needed to make the contents of the stowed dir (here `gh`) match. 
+
+For example, if you had `~/.config/untracked_app_config.yml` and `~/dotfiles/gh/.config/gh/config.yml`
+then `stow` can see that it doesn't need to create a `.config` file as that already exists. It
+leaves `untracked_app_config.yml` alone and just places `gh/config.yml` next to it. However, if
+it didn't already exist then it would create it. 
