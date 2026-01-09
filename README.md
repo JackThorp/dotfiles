@@ -23,3 +23,6 @@ leaves `untracked_app_config.yml` alone and just places `gh/config.yml` next to 
 it didn't already exist then it would create it. 
 
 Blog that initially inspired this: https://www.jakewiesler.com/blog/managing-dotfiles 
+
+TODO:
+- Consider using `--dotfiles` option in stow so that files are not hidden until they are symlinked
