@@ -79,10 +79,6 @@ pyclean () {
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
 }
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/projects
-source "$(pyenv which virtualenvwrapper.sh)"
-
 # Colocate pycahce files so empty src directories are not maintained
 export PYTHONPYCACHEPREFIX=~/.cache/cpython
 
@@ -101,6 +97,7 @@ export KRAKEN_DB_CONCURRENCY=4
  # Added by Kraken Core install script:
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+
  # Added by Kraken Core install script:
 export PATH="/Applications/Postgres.app/Contents/Versions/15/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
@@ -109,6 +106,12 @@ eval "$(pyenv init -)"
 # Invoke tab-completion script to be sourced with the Z shell.
 # Known to work on zsh 5.0.x, probably works on later 4.x releases as well (as
 # it uses the older compctl completion system).
+#
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/projects
+source "$(pyenv which virtualenvwrapper.sh)"
+
 
 _complete_invoke() {
     # `words` contains the entire command string up til now (including
