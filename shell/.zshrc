@@ -3,7 +3,7 @@
 
 # Revaluate prompt before everytime before displaying
 setopt prompt_subst
-source ~/.zsh/zsh_ps1
+source ~/.zsh_ps1
 source ~/.shell_aliases
 
 ### CONFIGURE GIT ###################################################

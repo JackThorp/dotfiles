@@ -25,12 +25,12 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'google/vim-searchindex'        " Gives a count of search results
 Plug 'github/copilot.vim'
 
-" Unused but maybe useful
-" Plug 'ycm-core/YouCompleteMe'           " Text completion TODO GET THIS
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-" Plug 'Raimondi/delimitMate'            " Auto closes brackets and stuff
-" Plug 'ludovicchabant/vim-gutentags'   " Depends on exhuberant ctags installed on system
-" Plug 'vim-scripts/taglist.vim'        " source code browser READ MANUAL!
+ Unused but maybe useful
+ Plug 'ycm-core/YouCompleteMe'           " Text completion TODO GET THIS
+ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+ Plug 'Raimondi/delimitMate'            " Auto closes brackets and stuff
+ Plug 'ludovicchabant/vim-gutentags'   " Depends on exhuberant ctags installed on system
+ Plug 'vim-scripts/taglist.vim'        " source code browser READ MANUAL!
 "Plug 'majutsushi/tagbar'
 "Plug 'atom/fuzzy-finder'
 "Plug 'digitaltoad/vim-jade'
