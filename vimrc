@@ -41,7 +41,9 @@ call plug#end()
 
 " Edit & source vimrc shortcuts
 nmap <leader>ev :tabe ~/.vimrc<cr>
-nmap <leader>sv :source ~/.vimrc<cr>
+nmap <leader>sv :source ~u.vimrc<cr>
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+let $FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 map <Space> <Leader>
 
 syntax on " Enables syntax processing in vim
