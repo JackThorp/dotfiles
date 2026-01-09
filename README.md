@@ -21,3 +21,5 @@ For example, if you had `~/.config/untracked_app_config.yml` and `~/dotfiles/gh/
 then `stow` can see that it doesn't need to create a `.config` file as that already exists. It
 leaves `untracked_app_config.yml` alone and just places `gh/config.yml` next to it. However, if
 it didn't already exist then it would create it. 
+
+Blog that initially inspired this: https://www.jakewiesler.com/blog/managing-dotfiles 
