@@ -30,10 +30,6 @@ export CLICOLOR=1
 export TERM=xterm-256color
 export CLRCOL=$'\e[0m'
 
-# Set the theme name
-export theme="molokai"
-source ~/.colors/colors.$theme
-
 # Set terminal to color on
 force_color_prompt=yes
 # Double check color support#
@@ -51,11 +47,8 @@ fi
 $(ls --color=always &>/dev/null) && alias ls='ls --color=always'
 
 # If supported then run dircolors
-if [[ $(dircolors 2>/dev/null) ]]
-then
-  $(gls --color=always &>/dev/null) && alias ls='gls --color=always'
-  test -r ~./.dircolors/dircolors.$theme &&
-    eval "$(dircolors -b ~/.dircolors/dircolors.$theme &>/dev/null)" || eval "$(dircolors -b)"
+if [[ $(dircolors 2>/dev/null) ]]; then
+  eval "$(dircolors -b ~/.dircolors &>/dev/null)" || eval "$(dircolors -b)"
 else
   # Default ls and colors
   export LSCOLORS=GxFxCxDxBxegedabagaced

@@ -42,8 +42,8 @@ _git_ps1()
   [[ -n $branch ]] && echo "($branch) "
 }
 
-local YELLOW='%F{229}'
-local ORANGE='%F{208}'
+local THEME_COLOR_MAIN='%F{1}'
+local THEME_COLOR_SECOND='%F{2}'
 local CLRCOL='%f'
 # %. => current directory
 # %n~ => n path parts from home directory
@@ -51,4 +51,4 @@ local CLRCOL='%f'
 # The prompt string is no re-interpolated each time so the components need defining separately
 local git_info='$(_git_ps1)' 
 
-PS1="${YELLOW}%.${CLRCOL} ${ORANGE}${git_info}${CLRCOL}%# "
+PS1="${THEME_COLOR_MAIN}%.${CLRCOL} ${THEME_COLOR_SECOND}${git_info}${CLRCOL}%# "

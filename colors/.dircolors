@@ -1,0 +1,14 @@
+# 30 - 37 for normal colours
+# 90 - 97 for bright
+DIR 01;92   # Directories
+LINK 01;33  # Symbolic links
+EXEC 01;35  # Executable files
+ORPHAN 01;1 # Orphaned symlinks
+PIPE 33     # Named pipes
+SOCK 01;5   # Sockets
+BLK 01;3    # Block devices
+CHR 01;3    # Character devices
+STICKY 01;3;42 # Sticky directories
+SETUID 37;41   # Setuid files
+SETGID 30;43   # Setgid files
+DOOR 01;5      # Other
