@@ -1,0 +1,38 @@
+# -------------------------
+# Font
+# -------------------------
+font-family = JetBrainsMono Nerd Font
+font-size = 13
+font-feature = calt liga
+
+# -------------------------
+# Theme
+# -------------------------
+# ghostty +list-theme
+# Like: alien-blood, citruzest, harper, later this evening, slate, synthwave,
+theme = Later This Evening
+#theme = Alien Blood
+# theme = Slate
+
+# -------------------------
+# Window / UI
+# -------------------------
+window-decoration = none
+window-padding-x = 4
+window-padding-y = 4
+window-padding-balance = true
+
+# -------------------------
+# Cursor
+# -------------------------
+cursor-style = block
+
+# -------------------------
+# Scrolling
+# -------------------------
+scrollback-limit = 10000
+
+# -------------------------
+# Shell integration
+# -------------------------
+shell-integration = zsh
