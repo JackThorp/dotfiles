@@ -19,7 +19,7 @@ local function init()
 	require("config.keymaps")
 	require("config.options")
 	require("config.commands")
-	require("config.colorscheme")
+	-- require("config.colorscheme")
 
 	-- [[ Add optional packages ]]
 	-- Nvim comes bundled with a set of packages that are not enabled by
