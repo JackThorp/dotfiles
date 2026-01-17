@@ -1,4 +1,4 @@
-local colorscheme = "gruvbox"
+local colorscheme = "base24-later-this-evening"
 
 -- pcall is protected call. This seems like exception handling in Lua?
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
