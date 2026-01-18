@@ -63,7 +63,7 @@ export FZF_DEFAULT_COMMAND="rg --files -g '!{.git,node_modules}'"
 # Force color output in tree
 alias tree='tree -C'
 
-export EDITOR=vim
+export EDITOR=nvim
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
