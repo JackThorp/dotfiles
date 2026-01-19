@@ -32,8 +32,6 @@
 	autocrlf = input
 [http]
 	postBuffer = 524288000
-[url "ssh://git@github.com/octoenergy/"]
-	insteadof = https://github.com/octoenergy/
 [include]
   path = ~/.gitconfig.local
 
