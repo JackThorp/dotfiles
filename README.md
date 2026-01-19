@@ -26,3 +26,4 @@ Blog that initially inspired this: https://www.jakewiesler.com/blog/managing-dot
 
 TODO:
 - Consider using `--dotfiles` option in stow so that files are not hidden until they are symlinked
+- More work required on tintty and other tools including sync with Ghostty.
