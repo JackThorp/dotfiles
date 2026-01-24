@@ -1,1 +1,0 @@
-return { "fcpg/vim-orbital" }
