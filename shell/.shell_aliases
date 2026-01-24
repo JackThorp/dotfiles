@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 alias nv='nvim'
+
 # GIT COMMANDS
 alias gs='git status'
 alias gco='git commit'
@@ -22,9 +23,7 @@ alias grc='git rebase --continue'
 alias gre='git rebase --edit-todo'
 alias grs='git restore --staged'
 
-# DEVELOPMENT COMMANDS
-alias wo='workon'
-
+# GITHUB CLI
 alias carmine="gh pr list --author 'LordCatello'"
 alias armin="gh pr list --author 'armirusco'"
 alias shihan="gh pr list --author 'shihanng'"
@@ -35,4 +34,10 @@ alias dt-review="gh search prs --state=open --review-requested=octoenergy/debt-t
 alias my-review="gh search prs --state=open --review-requested=@me"
 
 alias open-pr="gh pr view --web"
+
+# Terminal
+alias bat="batcat"
+
+# DEVELOPMENT COMMANDS
+alias wo='workon'
 

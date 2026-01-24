@@ -7,6 +7,12 @@ fi
 setopt prompt_subst
 source ~/.zsh_ps1
 source ~/.shell_aliases
+export HISTSIZE=10000  # Max lines kept in memory
+export SAVEHIST=$HISTSIZE # Max lines in the file
+export HISTFILE="~/.zsh_history"
+setopt share_history
+setopt incappendhistory
+export EDITOR=nvim
 
 ### CONFIGURE GIT ###################################################
 zstyle ':completion:*:*:git:*' script ~/.bash/git-completion.bash
@@ -57,17 +63,8 @@ else
 fi
 
 
-# FZF needs a list of files to perform fuzzy find on
-export FZF_DEFAULT_COMMAND="rg --files -g '!{.git,node_modules}'"
-
 # Force color output in tree
 alias tree='tree -C'
-
-export EDITOR=nvim
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 ### PYTHON ###
 pyclean () {
@@ -84,7 +81,9 @@ export PG_CLIENT="pgcli"
 export PATH="$HOME/.local/bin:$PATH"
 
 # TODO work out if/how I want to share postgres/python/pyenv config between home/work
-if [[ $WORK_ENV == "1" ]]; then
+if [[ $WORK_ENV == "0" ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+elif [[ $WORK_ENV == "1" ]]; then
 
   export WORKON_HOME=$HOME/.virtualenvs
   export PROJECT_HOME=$HOME/projects
@@ -133,4 +132,11 @@ if [[ $WORK_ENV == "1" ]]; then
   # * positional args: program names to complete for.
   compctl -K _complete_invoke + -f invoke inv
 fi
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+#
+# FZF needs a list of files to perform fuzzy find on
+export FZF_DEFAULT_COMMAND="rg --files -g '!{.git,node_modules}'"
+export FZF_DEFAULT_OPTS="--layout=reverse --border=bold --border=rounded --margin=3% --color=dark"
 
