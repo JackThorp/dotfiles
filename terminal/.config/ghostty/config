@@ -9,10 +9,7 @@ font-feature = calt liga
 # Theme
 # -------------------------
 # ghostty +list-theme
-# Like: alien-blood, citruzest, harper, later this evening, slate, synthwave,
-theme = Later This Evening
-#theme = Alien Blood
-# theme = Slate
+theme = "tinted-theming"
 
 # -------------------------
 # Window / UI
