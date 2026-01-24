@@ -2,7 +2,7 @@
 # Font
 # -------------------------
 font-family = JetBrainsMono Nerd Font
-font-size = 13
+font-size = 16
 font-feature = calt liga
 
 # -------------------------
@@ -14,7 +14,7 @@ theme = "tinted-theming"
 # -------------------------
 # Window / UI
 # -------------------------
-window-decoration = none
+window-decoration = true
 window-padding-x = 4
 window-padding-y = 4
 window-padding-balance = true
