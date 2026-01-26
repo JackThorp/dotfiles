@@ -3,15 +3,26 @@ if [ -f "$HOME/.env" ]; then
   source "$HOME/.env"
 fi
 
+### ZSH SETTINGS ###################################################
+
+# Set vim style keybinds! Esc to go into normal mode.
+bindkey -v
+
 # Revaluate prompt before everytime before displaying
 setopt prompt_subst
 source ~/.zsh_ps1
 source ~/.shell_aliases
+
 export HISTSIZE=10000  # Max lines kept in memory
 export SAVEHIST=$HISTSIZE # Max lines in the file
-export HISTFILE="~/.zsh_history"
-setopt share_history
-setopt incappendhistory
+export HISTFILE=$HOME/.zsh_history
+setopt SHARE_HISTORY # share history between all sessions
+setopt APPEND_HISTORY # append rather than overwrite history
+setopt INC_APPEND_HISTORY # add to history after each command
+setopt HIST_IGNORE_DUPS # won't save if same as last command in history
+setopt HIST_IGNORE_SPACE # do not add command to history if it stars with space e.g. " echo $secret"
+setopt HIST_REDUCE_BLANKS # extra space and tabs between commands, args etc will be reduced
+
 export EDITOR=nvim
 
 ### CONFIGURE GIT ###################################################

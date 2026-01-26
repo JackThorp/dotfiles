@@ -35,9 +35,6 @@ alias my-review="gh search prs --state=open --review-requested=@me"
 
 alias open-pr="gh pr view --web"
 
-# Terminal
-alias bat="batcat"
-
 # DEVELOPMENT COMMANDS
 alias wo='workon'
 
