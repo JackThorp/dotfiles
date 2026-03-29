@@ -10,6 +10,14 @@ return {
 	opts = {},
 	---@diagnostics enable: missing-fields
 	config = function()
-		require("fzf-lua").setup({ "fzf-vim" })
+		require("fzf-lua").setup({
+			{ "fzf-vim", "hide" },
+			keymap = {
+				builtin = {
+					true,
+					["<C-p>"] = "toggle-preview",
+				},
+			},
+		})
 	end,
 }

@@ -46,6 +46,7 @@ km.set(
 )
 km.set("n", "<leader>r", require("fzf-lua").registers, { desc = "Fzf registers" })
 km.set("n", "<leader>g", require("fzf-lua").live_grep, { desc = "Fzf live grep" })
+km.set("n", "<leader>sr", require("fzf-lua").resume, { desc = "Fzf [s]earch [r]esume" })
 
 -- Open LSP errors etc in a float if they trail off screen
 km.set("n", "<leader>e", ":lua vim.diagnostic.open_float()<CR>")
