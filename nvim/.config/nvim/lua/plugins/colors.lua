@@ -1,11 +1,12 @@
 return {
 	"tinted-theming/tinted-nvim",
-	config = function()
-		require("tinted-colorscheme").setup(nil, {
-			supports = {
-				tinty = true,
-				live_reload = true,
-			},
-		})
-	end,
+	opts = {
+		selector = {
+			enabled = true,
+			mode = "file",
+			path = "~/.local/share/tinted-theming/tinty/current_scheme",
+			watch = true,
+		},
+		live_reload = true,
+	},
 }
