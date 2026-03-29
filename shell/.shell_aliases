@@ -9,7 +9,7 @@ alias gb='git branch'
 alias gch='git checkout'
 # Git branch search
 alias gbs='git branch | fzf| tr -d '\''[:space:]'\'' | xargs git switch'
-alias gl='git log -n 10 --oneline | nl -v0'
+alias gl='git log -n 10 --oneline --color=always --decorate | nl -v0'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias ga='git add'
