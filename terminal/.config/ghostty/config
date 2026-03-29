@@ -27,7 +27,7 @@ cursor-style = block
 # -------------------------
 # Scrolling
 # -------------------------
-scrollback-limit = 10000
+scrollback-limit = 100000
 
 # -------------------------
 # Shell integration
