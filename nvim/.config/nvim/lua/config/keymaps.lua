@@ -65,3 +65,31 @@ function insertFullPath()
 end
 
 km.set("n", "<leader>p", insertFullPath, { noremap = true, silent = true })
+
+km.set("n", "gs", "<cmd>Git<CR>", { noremap = true, silent = true })
+
+-- Keymaps for ZK-NVIM i.e. zettlekasten
+km.set("n", "<leader>zb", "<Cmd>ZkBacklinks<CR>") -- inbound links
+km.set("n", "<leader>zl", "<Cmd>ZkLinks<CR>") -- outbound links
+km.set("n", "<leader>zs", "<Cmd>ZkNotes<CR>") -- title based search
+km.set("n", "<leader>zt", "<Cmd>ZkTags<CR>") -- title based search
+km.set("n", "<leader>zi", "<Cmd>ZkInsertLink<CR>") -- insert link to existing
+km.set("n", "<leader>zn", function()
+	vim.ui.input({ prompt = "Note title: " }, function(title)
+		if title and title ~= "" then
+			require("zk.commands").get("ZkNew")({ title = title })
+		end
+	end)
+end, { desc = "Create new permanent note with title" })
+
+km.set("n", "<leader>zlt", function()
+	vim.ui.input({ prompt = "Literature note title: " }, function(title)
+		if title and title ~= "" then
+			require("zk.commands").get("ZkNew")({ title = title, dir = "literature", template = "literature.md" })
+		end
+	end)
+end, { desc = "Create new literature note with title" })
+
+km.set("n", "<leader>zfl", function()
+	require("zk.commands").get("ZkNew")({ title = "Fleeting note", dir = "fleeting" })
+end, { desc = "Create new fleeting note" })
