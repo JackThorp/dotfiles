@@ -16,7 +16,7 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
 			gitsigns.setup({})
 
 			-- Configs
-			vim.keymap.set("n", "<leader>gpr", function()
+			vim.keymap.set("n", "<leader>pr", function()
 				local file = vim.fn.expand("%")
 				local line = vim.fn.line(".")
 				-- Get commit hash from git blame
