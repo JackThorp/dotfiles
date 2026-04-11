@@ -77,10 +77,57 @@ km.set("n", "<leader>zi", "<Cmd>ZkInsertLink<CR>") -- insert link to existing
 km.set("n", "<leader>zn", function()
 	vim.ui.input({ prompt = "Note title: " }, function(title)
 		if title and title ~= "" then
-			require("zk.commands").get("ZkNew")({ title = title })
+			require("zk.commands").get("ZkNew")({ title = title, dir = "permanent" })
 		end
 	end)
 end, { desc = "Create new permanent note with title" })
+
+km.set("n", "<leader>zp", function()
+	-- This will be relative to zettelkasten root (as defined by zk tool dotfile)
+	local projects_dir = "projects"
+
+	-- Create empty lua table
+	local projects = {}
+
+	for name, type in vim.fs.dir(projects_dir) do
+		if type == "directory" then
+			table.insert(projects, name)
+		end
+	end
+
+	require("fzf-lua").fzf_exec(projects, {
+		prompt = "Project❯ ",
+		fzf_opts = {
+			["--print-query"] = true,
+		},
+
+		actions = {
+			["default"] = function(selected, opts)
+				local query = opts.last_query
+				local choice = selected[1]
+
+				local project = choice or query
+				if not project or project == "" then
+					return
+				end
+
+				local dir = projects_dir .. "/" .. project
+				vim.fn.mkdir(dir, "p")
+
+				vim.ui.input({ prompt = "Note title: " }, function(title)
+					if not title or title == "" then
+						return
+					end
+
+					require("zk.commands").get("ZkNew")({
+						title = title,
+						dir = dir,
+					})
+				end)
+			end,
+		},
+	})
+end, { desc = "Create new project note with title" })
 
 km.set("n", "<leader>zlt", function()
 	vim.ui.input({ prompt = "Literature note title: " }, function(title)
