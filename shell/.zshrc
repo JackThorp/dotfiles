@@ -151,3 +151,5 @@ source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND="rg --files -g '!{.git,node_modules}'"
 export FZF_DEFAULT_OPTS="--layout=reverse --border=bold --border=rounded --margin=3% --color=dark"
 
+# Zettlekasten location
+export ZK_NOTEBOOK_DIR="$HOME/zettelkasten"
