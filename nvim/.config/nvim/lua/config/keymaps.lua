@@ -69,11 +69,11 @@ km.set("n", "<leader>p", insertFullPath, { noremap = true, silent = true })
 km.set("n", "gs", "<cmd>Git<CR>", { noremap = true, silent = true })
 
 -- Keymaps for ZK-NVIM i.e. zettlekasten
-km.set("n", "<leader>zb", "<Cmd>ZkBacklinks<CR>") -- inbound links
-km.set("n", "<leader>zl", "<Cmd>ZkLinks<CR>") -- outbound links
-km.set("n", "<leader>zs", "<Cmd>ZkNotes<CR>") -- title based search
-km.set("n", "<leader>zt", "<Cmd>ZkTags<CR>") -- title based search
-km.set("n", "<leader>zi", "<Cmd>ZkInsertLink<CR>") -- insert link to existing
+km.set("n", "<leader>zb", "<Cmd>ZkBacklinks<CR>", { desc = "Show note back links" })
+km.set("n", "<leader>zl", "<Cmd>ZkLinks<CR>", { desc = "Show outbound links" })
+km.set("n", "<leader>zs", "<Cmd>ZkNotes<CR>", { desc = "Search notes by title" })
+km.set("n", "<leader>zt", "<Cmd>ZkTags<CR>", { desc = "Search notes by tag" })
+km.set("n", "<leader>zi", "<Cmd>ZkInsertLink<CR>", { desc = "Insert link ... " })
 km.set("n", "<leader>zn", function()
 	vim.ui.input({ prompt = "Note title: " }, function(title)
 		if title and title ~= "" then
