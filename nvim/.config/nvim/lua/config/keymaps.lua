@@ -77,7 +77,7 @@ km.set("n", "<leader>zi", "<Cmd>ZkInsertLink<CR>", { desc = "Insert link ... " }
 km.set("n", "<leader>zn", function()
 	vim.ui.input({ prompt = "Note title: " }, function(title)
 		if title and title ~= "" then
-			require("zk.commands").get("ZkNew")({ title = title, dir = "permanent" })
+			require("zk.commands").get("ZkNew")({ title = title, dir = "permanent", template = "permanent.md" })
 		end
 	end)
 end, { desc = "Create new permanent note with title" })
@@ -89,6 +89,7 @@ km.set("n", "<leader>zp", function()
 	-- Create empty lua table
 	local projects = {}
 
+	-- I think this is the folder nvim starts in rather than the ZK root... We should read the env variable for that.
 	for name, type in vim.fs.dir(projects_dir) do
 		if type == "directory" then
 			table.insert(projects, name)
@@ -122,6 +123,7 @@ km.set("n", "<leader>zp", function()
 					require("zk.commands").get("ZkNew")({
 						title = title,
 						dir = dir,
+						template = "project.md",
 					})
 				end)
 			end,
